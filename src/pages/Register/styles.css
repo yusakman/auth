@@ -1,0 +1,15 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.register input, button {
+    height: 20px;
+    width: 300px;
+}
+
+.register button {
+    margin: 8px;
+}
