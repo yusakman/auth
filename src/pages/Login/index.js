@@ -4,11 +4,13 @@ import "./styles.css";
 import axios from "axios";
 import Dashboard from "../Dashboard";
 
-const Login = () => {
+const Login = (props) => {
+  const {setisLoggedIn} = props
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState("");
-  const [isLoggedIn, setisLoggedIn] = useState(null);
+  // const [isLoggedIn, setisLoggedIn] = useState(null);
 
   let navigate = useNavigate();
 
@@ -21,7 +23,6 @@ const Login = () => {
   };
 
   const handleLogin = (e) => {
-    setisLoggedIn(true);
 
     e.preventDefault();
 
@@ -37,13 +38,14 @@ const Login = () => {
         localStorage.setItem('token', res.data.token)
         localStorage.getItem(res.data.token)
         navigate("/Dashboard", { replace: true })
+        setisLoggedIn(true);
       })
       .catch((err) => console.log(err));
   };
 
-  const props = {
-    isLoggedIn
-  }
+  // const props = {
+  //   isLoggedIn
+  // }
 
   return (
     <div className="login">

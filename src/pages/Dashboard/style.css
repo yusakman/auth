@@ -1,0 +1,16 @@
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.card img {
+    height: 100px;
+    width: 100px;
+}

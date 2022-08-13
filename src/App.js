@@ -14,16 +14,19 @@ function App() {
   const [isLoggedIn, setisLoggedIn] = useState(null);
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
-    // if (!!token.length) {
-    //   setisLoggedIn(true);
-    // }
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setisLoggedIn(false);
+    } else {
+      setisLoggedIn(true);
+    }
   }, []);
 
   console.log(isLoggedIn, "islogin");
 
   const props = {
-    isLoggedIn
+    isLoggedIn,
+    setisLoggedIn
   }
 
   return (
@@ -31,12 +34,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login {...props}/>} />
         <Route
           path="/dashboard"
           element={
             <Protected isLoggedIn={isLoggedIn}>
-              <Dashboard />
+              <Dashboard {...props} />
             </Protected>
           }
         />
