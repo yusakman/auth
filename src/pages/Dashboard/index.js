@@ -22,17 +22,29 @@ const Dashboard = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const handleDelete = (id) => {
-    axios
-      .delete(`https://reqres.in/api/users/${id}`)
-      .then((res) => {
+//   const handleDelete = (id) => {
+//     axios
+//       .delete(`https://reqres.in/api/users/${id}`)
+//       .then((res) => {
+//         if (res.status === 204) {
+//           console.log(`user ${id} berhasil di hapus`);
+//           handleClose();
+//         }
+//       })
+//       .catch((err) => console.log(err));
+//   };
+
+  const handleDelete = async (id) => {
+    try {
+        const res = await axios.delete(`https://reqres.in/api/users/${id}`)
         if (res.status === 204) {
-          console.log("Berhasil Delete");
-          handleClose();
+            console.log(`data berhasil di hapus`);
+            handleClose();
         }
-      })
-      .catch((err) => console.log(err));
-  };
+    } catch(error) {
+        console.log(error)
+    }
+  }
 
   const style = {
     position: "absolute",
@@ -69,9 +81,9 @@ const Dashboard = (props) => {
               <button onClick={() => handleDelete(item.id)}>Delete</button>
             </Box>
           </Modal>
-          {/* <Link to={`/dashboard/${item.id}`}>
+          <Link to={`/dashboard/${item.id}`}>
             <button>Edit</button>
-          </Link> */}
+          </Link>
         </div>
       ))}
     </div>
