@@ -1,50 +1,41 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+// import axios from "axios";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { Modal, Box, Typography } from "@mui/material";
 
 const Dashboard = (props) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { data, handleDelete, open, handleOpen, handleClose } = props;
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
 
-  const [data, setData] = useState([]);
+  // Pindahin ke App
 
-  useEffect(() => {
-    getData();
-  });
+  // const [data, setData] = useState([]);
 
-  const getData = () => {
-    axios
-      .get("https://reqres.in/api/users?page=2")
-      .then((res) => setData(res.data.data))
-      .catch((err) => console.log(err));
-  };
+  // useEffect(() => {
+  //   getData();
+  // });
 
-//   const handleDelete = (id) => {
-//     axios
-//       .delete(`https://reqres.in/api/users/${id}`)
-//       .then((res) => {
-//         if (res.status === 204) {
-//           console.log(`user ${id} berhasil di hapus`);
-//           handleClose();
-//         }
-//       })
-//       .catch((err) => console.log(err));
-//   };
+  // const getData = () => {
+  //   axios
+  //     .get("https://reqres.in/api/users?page=2")
+  //     .then((res) => setData(res.data.data))
+  //     .catch((err) => console.log(err));
+  // };
 
-  const handleDelete = async (id) => {
-    try {
-        const res = await axios.delete(`https://reqres.in/api/users/${id}`)
-        if (res.status === 204) {
-            console.log(`data berhasil di hapus`);
-            handleClose();
-        }
-    } catch(error) {
-        console.log(error)
-    }
-  }
+  // const handleDelete = async (id) => {
+  //   try {
+  //       const res = await axios.delete(`https://reqres.in/api/users/${id}`)
+  //       if (res.status === 204) {
+  //           console.log(`data berhasil di hapus`);
+  //           handleClose();
+  //       }
+  //   } catch(error) {
+  //       console.log(error)
+  //   }
+  // }
 
   const style = {
     position: "absolute",
@@ -78,10 +69,13 @@ const Dashboard = (props) => {
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
               </Typography>
-              <button onClick={() => handleDelete(item.id)}>Delete</button>
+              <button onClick={(e) => {
+                e.preventDefault() 
+                handleDelete(item.id)
+              }}>Delete</button>
             </Box>
           </Modal>
-          <Link to={`/dashboard/${item.id}`}>
+          <Link to={`/detail/${item.id}`}>
             <button>Edit</button>
           </Link>
         </div>

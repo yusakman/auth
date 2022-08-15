@@ -1,0 +1,19 @@
+.detail-form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 400px;
+}
+
+.detail-form input, button {
+    height: 20px;
+    width: 300px;
+}
+
+.detail-form button {
+    margin: 8px;
+}
+
+.detail-form button:hover {
+    cursor: pointer;
+}
